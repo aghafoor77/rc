@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "rules": [
+    {
+      "rule_id": "R-PROHIBITED-001",
+      "category": "PROHIBITED",
+      "name": "Social Scoring by Public Authority",
+      "description": "AI systems for social scoring by public authorities",
+      "conditions": {
+        "operator": "AND",
+        "criteria": [
+          {
+            "field": "deployer_type",
+            "operator": "==",
+            "value": "public_authority"
+          },
+          {
+            "field": "purpose",
+            "operator": "in",
+            "value": [
+              "social_scoring",
+              "trustworthiness_evaluation"
+            ]
+          }
+        ]
+      },
+      "legal_basis": "Article 5(1)(c)",
+      "confidence": 1.0,
+      "priority": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "R-HR-012",
+      "category": "HIGH_RISK",
+      "name": "Creditworthiness Assessment",
+      "description": "AI for creditworthiness assessment in banking",
+      "conditions": {
+        "operator": "AND",
+        "criteria": [
+          {
+            "field": "sector",
+            "operator": "in",
+            "value": [
+              "banking",
+              "financial_services"
+            ]
+          },
+          {
+            "field": "purpose",
+            "operator": "in",
+            "value": [
+              "creditworthiness_assessment",
+              "loan_approval"
+            ]
+          }
+        ]
+      },
+      "legal_basis": "Article 6(2), Annex III(5)(b)",
+      "confidence": 1.0,
+      "priority": 2,
+      "enabled": true
+    }
+  ]
+}
