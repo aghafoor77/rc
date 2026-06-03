@@ -19,10 +19,10 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   # Ollama metrics (if available)
-  - job_name: 'ollama'
-    static_configs:
-      - targets: ['ollama:11434']
-    metrics_path: '/metrics'
+  #- job_name: 'ollama'
+  #  static_configs:
+  #    - targets: ['ollama:11434']
+  #  metrics_path: '/metrics'
 
   # PostgreSQL exporter (optional - requires postgres_exporter)
   # - job_name: 'postgres'
