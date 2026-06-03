@@ -203,6 +203,7 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./deployment/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./deployment/grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
     depends_on:
       - prometheus
@@ -210,6 +211,22 @@ services:
       - eu-ai-act-network
     restart: unless-stopped
 
+  # ============================================================================
+  # Portainer CE (Container Management)
+  # ============================================================================
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: eu-ai-act-portainer
+    ports:
+      - "9443:9443"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - eu-ai-act-network
+    restart: unless-stopped
+    
 # ============================================================================
 # Networks
 # ============================================================================
@@ -231,7 +248,9 @@ volumes:
     driver: local
   grafana_data:
     driver: local
+  portainer_data:
+    driver: local
   nginx_logs:
     driver: local
-
+    
 # Made with Bob
