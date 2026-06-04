@@ -1037,6 +1037,11 @@
                 }
                 
                 displayResults(result);
+                 // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+                submitBtn.textContent = 'Submit Assessment';
             } catch (err) {
                 console.error('Error:', err);
                 alert('Failed to assess the AI system. Please try again. Error: ' + err.message);

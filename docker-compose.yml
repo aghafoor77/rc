@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: eu-ai-act-backend
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - ENVIRONMENT=production
       - API_HOST=0.0.0.0
@@ -54,8 +54,8 @@ services:
         OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3:8b}
     image: eu-ai-act-ollama:${OLLAMA_MODEL:-llama3-8b}
     container_name: eu-ai-act-ollama
-    ports:
-      - "11435:11434"
+    expose:
+      - "11434"
     environment:
       - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3:8b}
     volumes:
@@ -84,8 +84,8 @@ services:
   postgres:
     image: postgres:15-alpine
     container_name: eu-ai-act-postgres
-    ports:
-      - "5433:5432"
+    expose:
+      - "5432"
     environment:
       - POSTGRES_DB=eu_ai_act_db
       - POSTGRES_USER=ai_compliance_user
@@ -109,8 +109,8 @@ services:
   redis:
     image: redis:7-alpine
     container_name: eu-ai-act-redis
-    ports:
-      - "6380:6379"
+    expose:
+      - "6379"
     volumes:
       - redis_data:/data
     networks:
@@ -178,8 +178,8 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: eu-ai-act-prometheus
-    ports:
-      - "9090:9090"
+    expose:
+      - "9090"
     volumes:
       - ./deployment/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus_data:/prometheus
@@ -196,8 +196,8 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: eu-ai-act-grafana
-    ports:
-      - "3001:3000"
+    expose:
+      - "3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=grafana-clock-panel
@@ -217,9 +217,9 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: eu-ai-act-portainer
-    ports:
-      - "9443:9443"
-      - "9000:9000"
+    expose:
+      - "9000"
+      - "9443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
